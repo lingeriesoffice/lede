@@ -10,12 +10,13 @@
 name: OpenWrt-CI
 
 on:
-    schedule:
-      - cron: 0 20 * * *
-    push:
-      branches: 
-        - master
-
+  push:
+    branches: 
+      - master
+  # schedule:
+  #   - cron: 0 20 * * *
+  # release:
+  #   types: [published]
 
 jobs:
   build:
@@ -142,24 +143,20 @@ jobs:
 
           # 常用LuCI插件选择:
           # cat >> .config <<EOF
-          CONFIG_PACKAGE_luci-app-docker=n
-          CONFIG_PACKAGE_luci-app-openvpn=n
-          CONFIG_PACKAGE_luci-app-openvpn-server=n
-          CONFIG_PACKAGE_luci-app-upnp=n
+          CONFIG_PACKAGE_luci-app-openvpn=y
+          CONFIG_PACKAGE_luci-app-openvpn-server=y
+          CONFIG_PACKAGE_luci-app-upnp=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray=y
-          CONFIG_PACKAGE_luci-app-ttyd=n
-          CONFIG_PACKAGE_luci-app-v2ray-server=n
+          CONFIG_PACKAGE_luci-app-v2ray-server=y
           CONFIG_PACKAGE_luci-app-webadmin=y
           CONFIG_PACKAGE_luci-app-wireguard=y
-          CONFIG_PACKAGE_luci-app-wrtbwmon=n
           CONFIG_PACKAGE_luci-app-lxc=y
           EOF
 
           # LuCI主题:
           cat >> .config <<EOF
-          CONFIG_PACKAGE_luci-theme-argon=y
           CONFIG_PACKAGE_luci-theme-bootstrap=y
           EOF
 
